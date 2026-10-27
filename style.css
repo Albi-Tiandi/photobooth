@@ -1,8 +1,3 @@
-/* =======================================================
-   PinWheel Photobox - Premium Korean Studio Design System
-   Modern Glassmorphism & High-End Aesthetic UI
-======================================================= */
-
 :root {
     --bg-dark: #0b0f19;
     --card-bg: rgba(23, 29, 45, 0.65);
@@ -80,13 +75,14 @@ body::after {
 
 .container {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1120px;
+    min-width: 0;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border-radius: var(--radius-lg);
-    padding: 36px 40px;
+    padding: 36px 32px;
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     margin: 0 auto;
 }
@@ -211,7 +207,8 @@ header {
 
 .main {
     display: grid;
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: minmax(0, 640px) 380px;
+    justify-content: center;
     gap: 36px;
     align-items: start;
 }
@@ -225,6 +222,7 @@ header {
     flex-direction: column;
     gap: 22px;
     width: 100%;
+    min-width: 0;
     max-width: 640px;
     margin: 0 auto;
 }
@@ -701,6 +699,7 @@ button {
 }
 
 .sidebar {
+    min-width: 0;
     background: rgba(15, 23, 42, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);
@@ -725,6 +724,8 @@ button {
     gap: 10px;
     overflow-x: auto;
     overflow-y: hidden;
+    min-width: 0;
+    max-width: 100%;
     padding: 4px 2px 12px;
     scroll-snap-type: x proximity;
 }
@@ -806,6 +807,7 @@ button {
     padding-top: 35px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: none;
+    min-width: 0;
     animation: fadeIn 0.4s ease;
 }
 
@@ -836,9 +838,13 @@ button {
 
 .studio-container {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 300px minmax(0, 1fr);
     gap: 36px;
     align-items: start;
+}
+
+.studio-container > * {
+    min-width: 0;
 }
 
 .preview-card {
@@ -1186,11 +1192,16 @@ button {
 
 @media (max-width: 1180px) {
     .main {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 640px);
+        justify-content: center;
+        gap: 28px;
     }
 
     .sidebar {
         order: 2;
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
     }
 
     .live-result-card {
@@ -1205,15 +1216,20 @@ button {
     }
 
     .studio-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
     }
 
     .preview-card {
         order: 1;
+        width: 100%;
+        max-width: 320px;
     }
 
     .studio-controls {
         order: 2;
+        width: 100%;
+        max-width: 640px;
     }
 }
 
@@ -1247,6 +1263,72 @@ button {
 
     .countdown {
         font-size: 90px;
+    }
+
+    .result-header {
+        text-align: center;
+    }
+
+    .studio-controls {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 16px 12px;
+    }
+
+    .brand-header h1 {
+        font-size: 27px;
+    }
+
+    .brand-header p {
+        font-size: 13px;
+    }
+
+    .top-controls {
+        gap: 10px;
+        padding: 8px 12px;
+    }
+
+    .control-item {
+        font-size: 12px;
+    }
+
+    .sidebar {
+        padding: 14px;
+    }
+
+    .filter-section {
+        gap: 8px;
+        padding: 10px 12px;
+    }
+
+    .studio-group {
+        padding: 14px;
+    }
+
+    .preview-card {
+        padding: 12px;
+    }
+
+    .toast-container {
+        top: auto;
+        bottom: 16px;
+        left: 12px;
+        right: 12px;
+        align-items: center;
+    }
+
+    .toast-item {
+        width: 100%;
+        max-width: 360px;
+        text-align: center;
     }
 }
 
