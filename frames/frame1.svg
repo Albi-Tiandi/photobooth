@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="2700" viewBox="0 0 900 2700">
+  <defs>
+    <mask id="windows" maskUnits="userSpaceOnUse" x="0" y="0" width="900" height="2700">
+      <rect width="900" height="2700" fill="#ffffff"/>
+      <rect x="60" y="80" width="780" height="540" rx="14" fill="#000000"/>
+      <rect x="60" y="660" width="780" height="540" rx="14" fill="#000000"/>
+      <rect x="60" y="1240" width="780" height="540" rx="14" fill="#000000"/>
+      <rect x="60" y="1820" width="780" height="540" rx="14" fill="#000000"/>
+    </mask>
+
+    <pattern id="denim" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="18" height="18" fill="#aebfd2"/>
+      <rect width="18" height="2" fill="#ffffff" opacity="0.2"/>
+      <rect y="9" width="18" height="2" fill="#2b3e5c" opacity="0.12"/>
+    </pattern>
+
+    <pattern id="pinkstripes" width="58" height="2700" patternUnits="userSpaceOnUse">
+      <rect width="58" height="2700" fill="#fff6f2"/>
+      <rect width="28" height="2700" fill="#f7d3de"/>
+      <rect x="30" width="2" height="2700" fill="#eab3c4"/>
+      <rect x="52" width="6" height="2700" fill="#fbe6ec"/>
+    </pattern>
+
+    <path id="star5" d="M0 -90 L21.2 -29.1 L85.6 -27.8 L34.2 11.1 L52.9 72.8 L0 36 L-52.9 72.8 L-34.2 11.1 L-85.6 -27.8 L-21.2 -29.1 Z"/>
+    <path id="star4" d="M0 -44 L10 -10 L44 0 L10 10 L0 44 L-10 10 L-44 0 L-10 -10 Z"/>
+  </defs>
+
+  <g mask="url(#windows)">
+    <rect width="900" height="2700" fill="#b3c3d5"/>
+    <rect x="0" y="0" width="452" height="2700" fill="url(#denim)"/>
+    <rect x="452" y="0" width="448" height="2700" fill="url(#pinkstripes)"/>
+    <rect x="446" y="0" width="10" height="2380" fill="#2b3e5c"/>
+    <line x1="434" y1="0" x2="434" y2="2380" stroke="#fff6f2" stroke-width="2" stroke-dasharray="10 12" opacity="0.55"/>
+
+    <g fill="#2b3e5c">
+      <rect x="46" y="66" width="808" height="568" rx="20"/>
+      <rect x="46" y="646" width="808" height="568" rx="20"/>
+      <rect x="46" y="1226" width="808" height="568" rx="20"/>
+      <rect x="46" y="1806" width="808" height="568" rx="20"/>
+    </g>
+  </g>
+
+  <g fill="none" stroke="#fff6f2" stroke-width="2.5">
+    <rect x="60" y="80" width="780" height="540" rx="14"/>
+    <rect x="60" y="660" width="780" height="540" rx="14"/>
+    <rect x="60" y="1240" width="780" height="540" rx="14"/>
+    <rect x="60" y="1820" width="780" height="540" rx="14"/>
+  </g>
+
+  <use href="#star5" transform="translate(800 150) rotate(12) scale(0.95)" fill="#cf3f5c"/>
+  <use href="#star5" transform="translate(800 150) rotate(12) scale(0.42)" fill="#fff6f2"/>
+
+  <g transform="translate(690 790) rotate(-6)">
+    <path d="M -34 104 L -84 168 L 16 116 Z" fill="#f7b5c7" stroke="#2b3e5c" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="-150" y="-56" width="300" height="162" rx="24" fill="#f7b5c7" stroke="#2b3e5c" stroke-width="5"/>
+    <path d="M -78 16 q 14 -20 28 0" fill="none" stroke="#2b3e5c" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 50 16 q 14 -20 28 0" fill="none" stroke="#2b3e5c" stroke-width="6" stroke-linecap="round"/>
+    <path d="M -20 40 q 20 20 40 0" fill="none" stroke="#2b3e5c" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="-100" cy="42" r="13" fill="#ee87a1" opacity="0.8"/>
+    <circle cx="100" cy="42" r="13" fill="#ee87a1" opacity="0.8"/>
+  </g>
+
+  <use href="#star5" transform="translate(112 1288) rotate(-14) scale(0.5)" fill="#cf3f5c"/>
+  <use href="#star4" transform="translate(795 1710) rotate(18) scale(0.85)" fill="#fff6f2" stroke="#2b3e5c" stroke-width="3"/>
+  <use href="#star5" transform="translate(178 2245) rotate(-8) scale(0.8)" fill="#2b3e5c"/>
+  <use href="#star5" transform="translate(178 2245) rotate(-8) scale(0.32)" fill="#fff6f2"/>
+
+  <g font-family="Poppins, 'Segoe UI', sans-serif" fill="#2b3e5c" text-anchor="middle">
+    <text x="450" y="2650" font-size="44" font-weight="700" letter-spacing="1.5">(caught) (on) (film)</text>
+  </g>
+  <use href="#star5" transform="translate(262 2636) scale(0.2)" fill="#cf3f5c"/>
+  <use href="#star5" transform="translate(640 2636) scale(0.2)" fill="#cf3f5c"/>
+</svg>
