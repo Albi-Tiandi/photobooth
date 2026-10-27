@@ -38,38 +38,74 @@ const PHOTOBOX_CONFIG = {
         {
             id: "frame1",
             name: "Denim Pink",
-            file: "frames/frame1.svg",
-            bgColor: "#b3c3d5",
+            file: "frames/frame1.webp",
+            thumb: "frames/frame1-thumb.webp",
+            bgColor: "#b7d9eb",
             accentColor: "#b04a5f",
             textColor: "#24344d",
-            tag: "Retro"
+            tag: "Retro",
+            cornerRadius: 0,
+            hideFooter: true,
+            slots: [
+                { x: 108.86, y: 168.86, width: 682.29, height: 488.57 },
+                { x: 108.86, y: 738.86, width: 682.29, height: 488.57 },
+                { x: 108.86, y: 1308.86, width: 682.29, height: 488.57 },
+                { x: 108.86, y: 1878.86, width: 682.29, height: 488.57 }
+            ]
         },
         {
             id: "frame2",
-            name: "Mint Daisy",
-            file: "frames/frame2.svg",
-            bgColor: "#d9efe2",
-            accentColor: "#2f7d68",
-            textColor: "#1e4d3f",
-            tag: "Fresh"
+            name: "Seal & Glitter",
+            file: "frames/frame2.webp",
+            thumb: "frames/frame2-thumb.webp",
+            bgColor: "#e2e2d8",
+            accentColor: "#8c2f24",
+            textColor: "#3b2a1e",
+            tag: "Vintage",
+            cornerRadius: 0,
+            hideFooter: true,
+            slots: [
+                { x: 84, y: 99, width: 732, height: 526.5 },
+                { x: 84, y: 679.5, width: 732, height: 526.5 },
+                { x: 84, y: 1263, width: 732, height: 526.5 },
+                { x: 84, y: 1845, width: 732, height: 526.5 }
+            ]
         },
         {
             id: "frame3",
-            name: "Butter Picnic",
-            file: "frames/frame3.svg",
-            bgColor: "#fff3c9",
-            accentColor: "#c2410c",
-            textColor: "#7c2d12",
-            tag: "Cute"
+            name: "Blue Lace",
+            file: "frames/frame3.webp",
+            thumb: "frames/frame3-thumb.webp",
+            bgColor: "#4d6cad",
+            accentColor: "#2d4f8f",
+            textColor: "#1e3a6b",
+            tag: "Lace",
+            cornerRadius: 0,
+            hideFooter: true,
+            slots: [
+                { x: 144.8, y: 311.2, width: 610.4, height: 372.8 },
+                { x: 144.8, y: 879.2, width: 610.4, height: 372.8 },
+                { x: 144.8, y: 1446.4, width: 610.4, height: 372.8 },
+                { x: 144.8, y: 2016, width: 610.4, height: 372.8 }
+            ]
         },
         {
             id: "frame4",
-            name: "Lavender Cloud",
-            file: "frames/frame4.svg",
-            bgColor: "#efe6fb",
-            accentColor: "#7c3aed",
-            textColor: "#4c1d95",
-            tag: "Dreamy"
+            name: "Maroon Film",
+            file: "frames/frame4.webp",
+            thumb: "frames/frame4-thumb.webp",
+            bgColor: "#fff9f1",
+            accentColor: "#7a2b2b",
+            textColor: "#4a1f1f",
+            tag: "Classic",
+            cornerRadius: 0,
+            hideFooter: true,
+            slots: [
+                { x: 189, y: 201, width: 522, height: 541.5 },
+                { x: 189, y: 768, width: 522, height: 541.5 },
+                { x: 189, y: 1335, width: 522, height: 541.5 },
+                { x: 189, y: 1900.5, width: 522, height: 541.5 }
+            ]
         },
         {
             id: "frame5",
