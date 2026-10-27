@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PinWheel Photobox - Korean photostrip 4 foto dengan live camera filter, frame aesthetic, dan HD export.">
+    <title>PinWheel Photobox - Korean Photostrip Studio</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header>
+            <div class="brand-header">
+                <span class="brand-badge">✨ KOREAN PHOTO STUDIO</span>
+                <h1>PinWheel Photobox</h1>
+                <p>Pilih frame photostrip aesthetic, pose 4 kali, dan cetak photobox instan!</p>
+            </div>
+
+            <!-- QUICK CONTROLS BAR -->
+            <div class="top-controls">
+                <div class="control-item">
+                    <label for="cameraSelect">📹 Kamera:</label>
+                    <select id="cameraSelect" class="select-input">
+                        <option value="">Memuat kamera...</option>
+                    </select>
+                </div>
+
+                <div class="control-item">
+                    <label for="timerSelect">⏱️ Timer:</label>
+                    <select id="timerSelect" class="select-input">
+                        <option value="3" selected>3 Detik</option>
+                        <option value="5">5 Detik</option>
+                        <option value="10">10 Detik</option>
+                    </select>
+                </div>
+
+                <button id="mirrorBtn" class="control-btn active" title="Cermin Kamera (Mirror)">
+                    🪞 Cermin (On)
+                </button>
+
+                <button id="muteBtn" class="control-btn" title="Aktif/Mati Suara">
+                    🔊 Suara Aktif
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN BOOTH AREA -->
+        <main class="main">
+
+            <!-- CAMERA BOOTH -->
+            <section class="camera-box">
+
+                <!-- CAMERA PREVIEW -->
+                <div class="camera-preview" id="cameraPreview">
+                    <!-- 4 BOOTH SLOTS: photostrip vertikal -->
+                    <div class="booth-slots-container" id="boothSlots">
+                        <div id="slot1" class="booth-slot slot-1 active-focus" data-slot="0">
+                            <video id="video" autoplay playsinline muted></video>
+                            <img id="slotImg1" class="slot-preview-img" src="" alt="">
+                            <div class="focus-badge">📹 Live Kamera</div>
+                        </div>
+                        <div id="slot2" class="booth-slot slot-2" data-slot="1">
+                            <img id="slotImg2" class="slot-preview-img" src="" alt="">
+                        </div>
+                        <div id="slot3" class="booth-slot slot-3" data-slot="2">
+                            <img id="slotImg3" class="slot-preview-img" src="" alt="">
+                        </div>
+                        <div id="slot4" class="booth-slot slot-4" data-slot="3">
+                            <img id="slotImg4" class="slot-preview-img" src="" alt="">
+                        </div>
+                    </div>
+
+                    <img id="frameOverlay" class="frame-overlay" src="" alt="Frame Overlay">
+                    <div id="countdown" class="countdown">3</div>
+                    <div id="shotsProgress" class="shots-progress">Foto 1 dari 4</div>
+                </div>
+
+                <!-- LIVE THUMBNAIL PROGRESS -->
+                <div id="photoThumbnails" class="photo-thumbnails"></div>
+
+                <!-- LIVE FILTER PRESETS -->
+                <div class="filter-section">
+                    <span class="section-label">🎨 Filter Foto:</span>
+                    <div id="filterList" class="filter-list"></div>
+                </div>
+
+                <!-- BOOTH ACTION BUTTONS -->
+                <div class="button-group">
+                    <button id="startBtn" class="btn-primary">
+                        📷 Mulai Foto (4x)
+                    </button>
+                    <button id="retakeBtn" class="btn-secondary">
+                        🔄 Ulang / Reset
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- FRAME SELECTION + LIVE RESULT SIDEBAR -->
+            <aside class="sidebar">
+                <div class="live-result-card">
+                    <div class="live-result-head">
+                        <span>🖼️ Hasil Live</span>
+                        <span class="live-badge"><span class="live-dot"></span> PREVIEW</span>
+                    </div>
+                    <div class="live-result-frame">
+                        <canvas id="liveResultCanvas" class="live-result-canvas" width="450" height="1350" role="img" aria-label="Preview Hasil Photobox"></canvas>
+                        <div id="liveResultEmpty" class="live-result-empty">
+                            <span class="live-result-empty-icon">📸</span>
+                            <strong>Belum ada foto</strong>
+                            <span>Ambil 4 pose, lalu hasil photostrip muncul di sini.</span>
+                        </div>
+                    </div>
+                    <button id="liveDownloadBtn" class="btn-download btn-live-download" disabled>
+                        💾 Download Photostrip
+                    </button>
+                    <p id="liveResultHint" class="live-result-hint">Preview photostrip 4 foto — hasil muncul otomatis di sini</p>
+                </div>
+
+                <h2>Pilih Frame Aesthetic</h2>
+                <p class="sidebar-sub">Klik frame untuk preview langsung</p>
+                <div id="frameList" class="frame-list"></div>
+            </aside>
+
+        </main>
+
+        <!-- RESULT STUDIO SECTION -->
+        <section class="result">
+            <div class="result-header">
+                <h2>✨ Studio Hasil Photobox</h2>
+                <p>Kreasikan hasil foto dengan frame lain, stiker, atau ubah judul sebelum dicetak!</p>
+            </div>
+
+            <div class="studio-container">
+                <div class="preview-card">
+                    <canvas id="resultCanvas" class="result-canvas" width="900" height="2700" role="img" aria-label="Hasil Akhir Photobox"></canvas>
+                </div>
+
+                <div class="studio-controls">
+                    <!-- CUSTOM TITLE / EVENT -->
+                    <div class="studio-group">
+                        <label for="customTitleInput">🏷️ Judul / Nama Photobox:</label>
+                        <input id="customTitleInput" type="text" class="text-input" placeholder="PINWHEEL PHOTOBOX" maxlength="32">
+                        <small>Otomatis diperbarui pada footer foto</small>
+                    </div>
+
+                    <!-- STICKER DECORATOR -->
+                    <div class="studio-group">
+                        <div class="group-header">
+                            <label>🎀 Tambah Stiker Lucu:</label>
+                            <button id="clearStickersBtn" class="btn-link">Hapus Semua</button>
+                        </div>
+                        <div id="stickerList" class="sticker-list"></div>
+                    </div>
+
+                    <!-- EXPORT ACTIONS -->
+                    <div class="studio-actions">
+                        <button id="downloadBtn" class="btn-download">
+                            💾 Download HD (PNG)
+                        </button>
+                        <button id="printBtn" class="btn-print">
+                            🖨️ Cetak / Print Foto
+                        </button>
+                        <button id="copyBtn" class="btn-copy">
+                            📋 Salin ke Clipboard
+                        </button>
+                    </div>
+
+                    <div class="studio-tips">
+                        <p>💡 <strong>Tips Cetak:</strong> Gunakan kertas foto ukuran 2x6 inci (5x15 cm) untuk hasil photostrip yang presisi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>PinWheel Photobox © 2026 • Premium Korean Photobooth Web App</p>
+            <p class="shortcuts-hint">Shortcut: <kbd>Spasi</kbd> Foto • <kbd>R</kbd> Ulang • <kbd>M</kbd> Mirror • <kbd>D</kbd> Download</p>
+        </footer>
+
+    </div>
+
+    <!-- Hidden Rendering Canvas (photostrip 1:3) -->
+    <canvas id="canvas" width="900" height="2700" hidden></canvas>
+
+    <!-- Sound Assets -->
+    <audio id="shutterSound" src="assets/shutter.mp3" preload="auto"></audio>
+    <audio id="countSound" src="assets/countdown.mp3" preload="auto"></audio>
+    <audio id="flashSound" src="assets/flash.mp3" preload="auto"></audio>
+
+    <!-- Camera Flash Effect -->
+    <div id="flash"></div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Application Scripts -->
+    <script src="config.js"></script>
+    <script src="frames/frames-data.js"></script>
+    <script src="camera.js"></script>
+    <script src="renderer.js"></script>
+    <script src="ui.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
