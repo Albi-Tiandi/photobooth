@@ -12,7 +12,7 @@ async function renderPhotobox(canvas, photos, options = {}) {
     // Resolve options
     const layoutKey = options.layout || PHOTOBOX_CONFIG.activeLayout || "photostrip4";
     const layoutConfig = PHOTOBOX_CONFIG.layouts[layoutKey] || PHOTOBOX_CONFIG.layouts.photostrip4;
-    const selectedFramePath = options.frameFile || "frames/frame1.svg";
+    const selectedFramePath = options.frameFile || PHOTOBOX_CONFIG.frames[0].file;
     const frameObj = PHOTOBOX_CONFIG.frames.find(f => f.file === selectedFramePath) || PHOTOBOX_CONFIG.frames[0];
     const filterKey = options.filter || PHOTOBOX_CONFIG.activeFilter || "normal";
     const filterObj = PHOTOBOX_CONFIG.filters.find(f => f.id === filterKey) || PHOTOBOX_CONFIG.filters[0];
@@ -27,11 +27,11 @@ async function renderPhotobox(canvas, photos, options = {}) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // 2. DRAW PHOTOS WITH COVER-CROP & ASPECT RATIO INTEGRITY
-    const slots = layoutConfig.slots;
+    const slots = (frameObj.slots && frameObj.slots.length) ? frameObj.slots : layoutConfig.slots;
+    const cornerRadius = frameObj.cornerRadius ?? layoutConfig.cornerRadius ?? 0;
 
     for (let i = 0; i < slots.length; i++) {
         const slot = slots[i];
-        const cornerRadius = layoutConfig.cornerRadius || 16;
         // In dual strip, slots map to photoIndex (0..3 duplicated)
         const photoIndex = slot.photoIndex !== undefined ? slot.photoIndex : i;
         const photoSrc = photos[photoIndex];
@@ -131,7 +131,9 @@ async function renderPhotobox(canvas, photos, options = {}) {
     }
 
     // 4. DRAW FOOTER & BRANDING TYPOGRAPHY
-    drawBrandFooter(ctx, canvas, frameObj, brandTitle, subTitle, dateText);
+    if (!frameObj.hideFooter) {
+        drawBrandFooter(ctx, canvas, frameObj, brandTitle, subTitle, dateText);
+    }
 
     // 5. DRAW STICKERS (IF ANY)
     for (const stk of stickers) {
