@@ -61,6 +61,7 @@ class UIController {
             shotsProgress: document.getElementById("shotsProgress"),
             photoThumbnails: document.getElementById("photoThumbnails"),
             customTitleInput: document.getElementById("customTitleInput"),
+            titleGroup: document.querySelector(".studio-group.title-group"),
             stickerList: document.getElementById("stickerList"),
             clearStickersBtn: document.getElementById("clearStickersBtn"),
             toastContainer: document.getElementById("toastContainer"),
@@ -197,7 +198,7 @@ class UIController {
 
             card.innerHTML = `
                 <div class="frame-thumb" style="background-color: ${frame.bgColor}">
-                    <img src="${frame.file}" alt="${frame.name}" onerror="this.style.display='none'">
+                    <img src="${frame.thumb || frame.file}" alt="${frame.name}" onerror="this.style.display='none'">
                     <div class="frame-tag" style="color: ${frame.accentColor}">${frame.tag || "Frame"}</div>
                 </div>
                 <span class="frame-name">${frame.name}</span>
@@ -376,10 +377,33 @@ class UIController {
         const frameObj = PHOTOBOX_CONFIG.frames.find(f => f.file === this.selectedFrame) || PHOTOBOX_CONFIG.frames[0];
 
         if (this.dom.frameOverlay) {
-            this.dom.frameOverlay.src = this.selectedFrame;
+            const embedded = window.PHOTOBOX_FRAME_DATA && window.PHOTOBOX_FRAME_DATA[frameObj.file];
+            this.dom.frameOverlay.src = embedded || frameObj.file;
         }
         if (this.dom.cameraPreview) {
             this.dom.cameraPreview.style.background = frameObj.bgColor;
+        }
+
+        const canvasW = PHOTOBOX_CONFIG.canvas.width;
+        const canvasH = PHOTOBOX_CONFIG.canvas.height;
+        const layout = PHOTOBOX_CONFIG.layouts[PHOTOBOX_CONFIG.activeLayout] || {};
+        const usesFrameSlots = !!(frameObj.slots && frameObj.slots.length);
+        const slots = usesFrameSlots ? frameObj.slots : (layout.slots || []);
+        const radius = frameObj.cornerRadius ?? layout.cornerRadius ?? 0;
+
+        this.dom.slots.forEach((el, i) => {
+            const slot = slots[i];
+            if (!el || !slot) return;
+            el.style.left = ((slot.x / canvasW) * 100).toFixed(3) + "%";
+            el.style.top = ((slot.y / canvasH) * 100).toFixed(3) + "%";
+            el.style.width = ((slot.width / canvasW) * 100).toFixed(3) + "%";
+            el.style.height = ((slot.height / canvasH) * 100).toFixed(3) + "%";
+            // Preview is rendered at a third of the export size.
+            el.style.borderRadius = usesFrameSlots ? (radius / 3) + "px" : "";
+        });
+
+        if (this.dom.titleGroup) {
+            this.dom.titleGroup.style.display = frameObj.hideFooter ? "none" : "";
         }
     }
 
@@ -509,7 +533,16 @@ class UIController {
                 this.dom.countdown.classList.add("show");
                 this.playSound(this.dom.countSound);
 
-                await this.sleep(900);
+                if (s === 1) {
+                    // countdown.mp3 keeps beeping every second after the first
+                    // tick; cut it once this tick's beep is done, otherwise a
+                    // leftover beep lands on top of the flash.
+                    await this.sleep(650);
+                    this.stopSound(this.dom.countSound);
+                    await this.sleep(250);
+                } else {
+                    await this.sleep(900);
+                }
                 this.dom.countdown.classList.remove("show");
                 await this.sleep(100);
             }
@@ -717,6 +750,16 @@ class UIController {
             if (playPromise !== undefined) {
                 playPromise.catch(e => console.warn("Audio play prevented:", e));
             }
+        } catch (e) {
+            console.warn("Sound error:", e);
+        }
+    }
+
+    stopSound(audioElement) {
+        if (!audioElement) return;
+        try {
+            audioElement.pause();
+            audioElement.currentTime = 0;
         } catch (e) {
             console.warn("Sound error:", e);
         }
